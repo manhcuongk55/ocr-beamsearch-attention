@@ -202,15 +202,16 @@ class TextImageGenerator:
     def build_data(self):
         print(self.n, " Image Loading start... ", self.img_dirpath)
         for i, img_file in enumerate(self.img_dir):
-            img = image.load_img(self.img_dirpath + img_file, target_size=SIZE[::-1], interpolation='bicubic')
-            img = image.img_to_array(img)
-            img = preprocess_input(img)
-            self.imgs[i] = img
-            if self.labels != None: 
-                self.texts.append(self.labels[img_file][:MAX_LEN])
-            else:
-                #valid mode
-                self.texts.append('')
+            if ".png" in img_file:
+                img = image.load_img(self.img_dirpath + img_file, target_size=SIZE[::-1], interpolation='bicubic')
+                img = image.img_to_array(img)
+                img = preprocess_input(img)
+                self.imgs[i] = img
+                if self.labels != None:
+                    self.texts.append(self.labels[img_file][:MAX_LEN])
+                else:
+                    #valid mode
+                    self.texts.append('')
         print("Image Loading finish...")
 
     def next_sample(self):
