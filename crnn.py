@@ -105,17 +105,17 @@ def train(datapath, labelpath, epochs, batch_size, lr, finetune=False, name='mod
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--train", default='data/train/0916_Data Samples 2/', type=str)
-    parser.add_argument("--label", default='data/train/0916_Data Samples 2/labels.json', type=str)
+    parser.add_argument("--train", default='data/test/1015_Private Test/', type=str)
+    parser.add_argument("--label", default='data/test/1015_Private Test/labels.json', type=str)
 
-    parser.add_argument("--epochs", default=100, type=int)
-    parser.add_argument('--batch_size', default=3, type=int)
+    parser.add_argument("--epochs", default=1, type=int)
+    parser.add_argument('--batch_size', default=1, type=int)
     parser.add_argument('--device', default=1, type=int)
     parser.add_argument('--finetune', default=0, type=int)
     parser.add_argument('--lr', default=0.001, type=float)
     parser.add_argument('--name', default='best', type=str)
     args = parser.parse_args()
 
-    os.environ["CUDA_VISIBLE_DEVICES"] = str(args.device)
+    os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
     train(args.train, args.label, args.epochs, args.batch_size, args.lr, args.finetune, args.name)
